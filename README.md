@@ -249,7 +249,7 @@ Susunod sa sayo kahit saan.
 
 # Float
 - Will place the element either on top, bottom, left, or right inside its parent element. It will be removed from the DOM of its parent element only but the other elements will respect its position. unlike to abosulute positioning. So sa madaling salita kunware nasa kwarto ka kahit san ka pumwesto sa kwarto ok lang lahat ng gamit don magaadjust kung san mo gusto. So basically yung float property bahala ka sa buhay mo magpalutang lutang sa loob ng kwarto parang ganon.
-![images (14)](https://github.com/user-attachments/assets/6428fa96-2b84-4f05-8021-14f01adfea7b)
+![float-sample](https://github.com/user-attachments/assets/34be4771-effd-4f38-bfef-3c1377c1d2f2)
 
 # Units
 - em: Will be relative to parent or the element itself. Generally used for margin, padding, and widths.
@@ -261,7 +261,7 @@ Susunod sa sayo kahit saan.
 
 # Isolation
 - Will make an element to be isolated from other elements. Meaning that an element declared as isolated will block all the styles coming from other element styles. The most useful this property is when creating a visual effect on an targeted element. In tagalog iisolate nya sarili nya lahat mg makakaapekto sakanya eh dinya papansinin para maging unique sya (visual effect).
-![images (17)](https://github.com/user-attachments/assets/7d631b28-6ca5-46e2-9a82-42fead50a8ba)
+![isolation-sample](https://github.com/user-attachments/assets/d73f44f3-7bde-43a9-a386-97e075097408)
 
 # Display
 - flex: The flex system.
@@ -299,7 +299,7 @@ element {
 ```
 
 # Box model
-![images (2)](https://github.com/user-attachments/assets/21ad18ce-3fb1-4b08-b86e-c9c1e533daff)
+![box-model-sample](https://github.com/user-attachments/assets/aa1a76ef-3d73-41fa-b11a-ea6bd281e9f8)
 
 # Inheritance
 ## Properties that are auto-inherited.
@@ -350,29 +350,30 @@ Meaning that some of the parent propertues are not applied automatically in its 
 - Used to control whether properties like background, border, border-image, box-shadow, clip-path, margin, and padding should be rendered as if the element were one continuous fragment, or distinct blocks.
 
 # Object fit
-![images (12)](https://github.com/user-attachments/assets/d7d4cf33-eac5-4646-9bb9-9e6d242e3457)
+![object-fit-sample](https://github.com/user-attachments/assets/87ea4efd-4106-49a1-b5c1-6cf437c1004d)
+
 
 # Object position
-![IMG_20240906_222632](https://github.com/user-attachments/assets/2aca3541-75a1-4414-b4fd-42287ee36904)
+![object-position-sample](https://github.com/user-attachments/assets/510320ef-01b9-4b96-a8b8-37d5c44b3463)
 
 # Overflow
 - Sometimes the content doesnt fit inside its parent container and the content overflow. You can control that with this property.
-![1681726386478-css overflow property example](https://github.com/user-attachments/assets/6f57db8d-4ee5-4026-a21e-5c41afbab9c2)
+![overflow-sample](https://github.com/user-attachments/assets/263200b7-33c1-4415-995b-e4e9e035ea21)
 
 # Overscroll
 - Controls how the scroll behaves when scrollable boundary reached. Set this always to contain. Ang default nito eh after mareach yung end magsscroll na yung page. Pero pag contain pagka nareach nya yung end ng scrollable content eh ok na di mahsscroll yung page.
-![overscroll-behavior-only-affects-scroll-containers@2x](https://github.com/user-attachments/assets/29b8828f-7899-4a57-974f-cf72d417f12f)
-
+![overscroll-sample](https://github.com/user-attachments/assets/f14178e7-3439-48f5-8f22-513bb27b6ac6)
 
 # Flex
 Keep in mind that when you specify an element to be display:flex it will create a cross where the main axis is based on your flex-direction since flex direction defaults to row the main axis by default is vertical. when you set the flex direction to be column the main axis will be horizontal.
+![flex-sample](https://github.com/user-attachments/assets/33faf235-7fa4-4143-a514-52ddfdcb7832)
 
 - flex-direction: row; // The default is row and can be change with column.
 - justify-content: Will control the elements in the main-axis.
 - align-items: will control the elements in the cross axis.
 - flex-wrap: Will control how the elements in the main axis should behave. wrap or no-wrap.
 - flex-grow: Can be used only in child element. It defines how a certain element takes ups a space.
-![images (4)](https://github.com/user-attachments/assets/60b90355-90a4-46e4-92f3-fa54983f2d65)
+![flex-grow-sample](https://github.com/user-attachments/assets/84d95d63-3f37-49de-a7ac-694c4ac806ae)
 
 - flex-shrink: Can be used only in child element. It defines how a certain element start to shink before other elements.
 
@@ -380,7 +381,7 @@ Keep in mind that when you specify an element to be display:flex it will create 
 
 - align-self: Can be use only in child element if want you a certain element to be special in its position.
 - gap: add gap to every element. use this instead of margin or padding.
-![images (2)](https://github.com/user-attachments/assets/9d040ad1-c834-4515-b55d-1e6b912036d5)
+
 
 # Tricks
 - Make your element below to other element para di nya matakpan yung ibamg element nasa likod sya ba.
@@ -415,7 +416,7 @@ overflow: hidden
 
 ## Background clip
 - Set what should the background occupy in box model
-![image](https://github.com/user-attachments/assets/4645903e-b993-4084-9095-32abd50b18ad)
+![background-clip-sample](https://github.com/user-attachments/assets/c0f94f47-e8c0-48f3-b78e-d31e5b9d5a8a)
 
 ###### Now that you know the fundamentals of CSS we now talk about proper front end development. This topic is not that mandatatory to learn. Build a css project first explore it yourself.
 
