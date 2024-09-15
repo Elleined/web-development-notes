@@ -229,12 +229,7 @@ imports: [RouterOutlet, RouterModule, RouterLink, RouterLinkActive],
 ### Templated Forms
 ![330440403-40c762c0-cdc8-4fae-b879-384445a0c76a](https://github.com/user-attachments/assets/354750aa-4797-461b-a526-931a25dd985e)
 
-
-# Front end notes
-# front-end-notes
-front-end-notes? Because why not?. Just read it :)
-
-# CSS
+# CSS notes
 ## Positioning
 - absolute: Will be removed from the DOM. The other html elements treat it as it doesn't exists. Bahala ka san mo sya ilalagay.
 
