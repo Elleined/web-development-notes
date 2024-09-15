@@ -1,119 +1,110 @@
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
-        Previous
-      </div>
-      <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
-        Today
-      </div>
-      <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
-        Next
-      </div>
+<div class="flex justify-evenly items-center mt-4 mb-4">
+    <div class="flex justify-center items-center gap-1">
+        <p-button label="Previous" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" />
+        <p-button label="Today" mwlCalendarToday [(viewDate)]="viewDate" />
+        <p-button label="Next" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" />
     </div>
-  </div>
-  <div class="col-md-4">
     <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-  </div>
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
-        Month
-      </div>
-      <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
-        Week
-      </div>
-      <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
-        Day
-      </div>
+    <div class="flex justify-center items-center gap-1">
+        <p-button label="Month" (click)="view = calendarView.Month" />
+        <p-button label="Week" (click)="view = calendarView.Week" />
+        <p-button label="Day" (click)="view = calendarView.Day" />
     </div>
-  </div>
 </div>
-<br />
 <div [ngSwitch]="view">
-  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-    [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-  </mwl-calendar-month-view>
-  <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-  </mwl-calendar-day-view>
+    <mwl-calendar-month-view *ngSwitchCase="calendarView.Month" [viewDate]="viewDate" [events]="appointments"
+        [refresh]="refresh" (eventClicked)="appointmentClicked($event.event)"
+        (eventTimesChanged)="appointmentChanged($event)">
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view *ngSwitchCase="calendarView.Week" [viewDate]="viewDate" [events]="appointments"
+        [refresh]="refresh" (eventClicked)="appointmentClicked($event.event)"
+        (eventTimesChanged)="appointmentChanged($event)">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view *ngSwitchCase="calendarView.Day" [viewDate]="viewDate" [events]="appointments"
+        [refresh]="refresh" (eventClicked)="appointmentClicked($event.event)"
+        (eventTimesChanged)="appointmentChanged($event)">
+    </mwl-calendar-day-view>
 </div>
 
-<!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+<div>
+    <div class="m-4 flex justify-between items-center">
+        <h3>Manage Appointments</h3>
+        <p-button label="Add" (onClick)="addAppointmentDialogVisible = true" />
+    </div>
+    <p-table [value]="appointments" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="title" class="text-center">Title
+                    <p-sortIcon field="title" />
+                </th>
+                <th pSortableColumn="start" class="text-center">Starts at
+                    <p-sortIcon field="start" />
+                </th>
+                <th pSortableColumn="end" class="text-center">Ends at
+                    <p-sortIcon field="end" />
+                </th>
+                <th class="text-center">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-appointment>
+            <tr>
+                <td class="text-center">
+                    <input type="text" pInputText [(ngModel)]="appointment.title" (keyup)="refresh.next()"
+                        placeholder="Title" />
+                </td>
 
-<br /><br /><br />
-
-<h3>
-  Edit events
-  <button class="btn btn-primary float-end" (click)="addEvent()">
-    Add new
-  </button>
-  <div class="clearfix"></div>
-</h3>
-
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Starts at</th>
-        <th>Ends at</th>
-        <th>Remove</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let event of events">
-        <td>
-          <input type="text" class="form-control" [(ngModel)]="event.title" (keyup)="refresh.next()" />
-        </td>
-
-        <td>
-          <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.start"
-            (ngModelChange)="refresh.next()" [altInput]="true" [convertModelValue]="true" [enableTime]="true"
-            dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i" placeholder="Not set" />
-        </td>
-        <td>
-          <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.end" (ngModelChange)="refresh.next()"
-            [altInput]="true" [convertModelValue]="true" [enableTime]="true" dateFormat="Y-m-dTH:i"
-            altFormat="F j, Y H:i" placeholder="Not set" />
-        </td>
-        <td>
-          <button class="btn btn-danger" (click)="deleteEvent(event)">
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+                <td class="text-center">
+                    <p-calendar inputId="calendar-12h" [appendTo]="'body'" [(ngModel)]="appointment.start"
+                        [showTime]="true" placeholder="Start" [hourFormat]="'12'" />
+                </td>
+                <td class="text-center">
+                    <p-calendar [appendTo]="'body'" inputId="calendar-12h" [(ngModel)]="appointment.end"
+                        [showTime]="true" [hourFormat]="'12'" placeholder="End" />
+                </td>
+                <td class="text-center">
+                    <p-button label="Delete" (onClick)="removeAppointment(appointment)" />
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
 
-<ng-template #modalContent let-close="close">
-  <div class="modal-header">
-    <h5 class="modal-title">Event action occurred</h5>
-    <button type="button" class="close" (click)="close()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
+<!-- Dialog for dragged or resize  -->
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="draggedOrResizeDialogVisible" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-5">Update your information.</span>
     <div>
-      Action:
-      <pre>{{ modalData?.action }}</pre>
+        Action:
+        <pre>{{ modalData?.action }}</pre>
     </div>
     <div>
-      Event:
-      <pre>{{ modalData?.event | json }}</pre>
+        Event:
+        <pre>{{ modalData?.event | json }}</pre>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="close()">
-      OK
-    </button>
-  </div>
-</ng-template>
+    <div class="flex justify-content-end gap-2">
+        <p-button label="Cancel" severity="secondary" (onClick)="draggedOrResizeDialogVisible = false" />
+        <p-button label="Save" (onClick)="draggedOrResizeDialogVisible = false" />
+    </div>
+</p-dialog>
+
+<!-- Add Appointment Dialog -->
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="addAppointmentDialogVisible" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-5">
+        Update your information.
+    </span>
+    <div class="flex align-items-center gap-3 mb-3">
+        <label for="username" class="font-semibold w-6rem">
+            Username
+        </label>
+        <input pInputText id="username" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+        <label for="email" class="font-semibold w-6rem">
+            Email
+        </label>
+        <input pInputText id="email" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex justify-content-end gap-2">
+        <p-button label="Cancel" severity="secondary" (onClick)="addAppointmentDialogVisible = false" />
+        <p-button label="Save" (onClick)="addAppointmentDialogVisible = false" />
+    </div>
+</p-dialog>

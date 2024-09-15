@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-calendar-project": {
+    "core-project": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-calendar-project",
+            "outputPath": "dist/core-project",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-calendar-project:build:production"
+              "buildTarget": "core-project:build:production"
             },
             "development": {
-              "buildTarget": "angular-calendar-project:build:development"
+              "buildTarget": "core-project:build:development"
             }
           },
           "defaultConfiguration": "development"
