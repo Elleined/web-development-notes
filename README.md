@@ -221,6 +221,11 @@ imports: [RouterOutlet, RouterModule, RouterLink, RouterLinkActive],
 ### Control Value Accessor
 - Used to create a link between form control instance and html element
 
+- formGroup: 
+- formGroupName: For nested form
+- formControlName: For each form field
+- formArrayName: For dynamic fields like list
+
 ## 2 Types of Forms
 ### Reactive Forms
 #### Control Value Management
