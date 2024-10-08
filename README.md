@@ -2,7 +2,6 @@
 Notes for Web Development using Angular 18
 
 # Angular notes
-# angular-notes
 Notes for Angular
 
 # Pre-requisites
@@ -233,6 +232,31 @@ imports: [RouterOutlet, RouterModule, RouterLink, RouterLinkActive],
 - To gain access you have 2 choices either use Observable or in component class using the ``subscribe()`` method
 ### Templated Forms
 ![330440403-40c762c0-cdc8-4fae-b879-384445a0c76a](https://github.com/user-attachments/assets/354750aa-4797-461b-a526-931a25dd985e)
+
+
+# ViewChild
+- Used for complex scenarios where you need direct access to child component properties and methods. Like when modifying DOM, Directives, and etc...
+
+## When to use
+- Whenever you need a complex logic that needs direct access to child properties and methods.
+- Whenever you need more than just data passing
+
+# Input
+- Achieve using @Input()
+- Used for just simply passing data properties from parent to child.
+- Used for concise and standard way of passing data between parent to child.
+- Promotes loose coupling.
+
+## When to use
+- When you need to pass data from parent to child.
+
+# Output
+- Achieve using @Output()
+- Used for notifying the parent component whenever something happens in the child component. Just like event driven architecture.
+- Promotes loose coupling
+
+## When to use
+- When you need to notify the parent component that something happens in the child component.
 
 # CSS notes
 ## Positioning
