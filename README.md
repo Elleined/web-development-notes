@@ -114,29 +114,85 @@ ng g c <component-name>
 ```
 
 # Angular Directives
-## Structural Directives
-Structural directives alter the layout of the DOM by adding, changing, or removing elements.
-Examples include:
-- `*ngFor`: Iterates over a collection and instantiates a template once for each item.
-- `*ngIf`: Conditionally includes or excludes a section of HTML based on an expression.
-- `*ngSwitch`:
-- `<ng-emplate> </ng-template>`:
+# Directives
+- Directives in angular are like Annotation in java
+- Add additional behavior to your element/ component
 
-###### Note: An html element can only have one and only one directive.
+##### Types of Directive ####
+## Component Directives: It is a custom element that has its own HTML and Javascript. Did you know that every angular component is a Directive with a view.
 
-## Attribute Directives
-Attribute directives change the appearance or behavior of an element, component, or another directive.
-Examples include:
-- `ngClass`: Adds or removes CSS classes dynamically based on certain conditions.
-- `ngStyle`: Sets inline styles dynamically based on expressions.
-- `ngModel`: Used for two wat data binding.
-- `formControl`: Used to link input html element and ts variable.
-- `formGroup`: Used to group form controls.
-   - `formControlName=<form-control-name-from-ts-file>`: Same concept of form control but with different syntax.
+## Structural Directives: Used to alter the DOM by adding or removing elements. In analogy they are the workers/ labors in your construction site. Examples are @if, @for,
+and @switch. Identified by * or @ in html file.
 
-## Component Directives
-- Component directives are used to create reusable components with their own view and behavior.
-They encapsulate a part of the UI and its logic. @Component
+- @for properties: index, first, last, even, odd, and count.
+
+In angular 17 and up *ngIf is now updated to @If instead this applies to all structural directives like ngFor, ngSwitch and so on... The main advantage of using the latest is that you dont need to import the CommonModule, supports if else, and provide performace benefits.
+
+## Attribute Directives: Used to change the appearance or behavior of elements. In analogy they are the designers of your house. Examples are ngClass and ngStyle that will apply the specified style or class based on condition.
+
+#### 
+Attribute directive can have @Input, @Output, and @HostListener just like your typical component.
+
+Example of custom attribute directive
+```
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+
+@Directive({
+  selector: '[highlight]'
+})
+export class HighlightDirective {
+
+  @Input() color: string = 'yellow';  // default color
+
+  constructor(private el: ElementRef) {}
+
+  // Mouse enter event
+  @HostListener('mouseenter') onMouseEnter() {
+    this.highlight(this.color);
+  }
+
+  // Mouse leave event
+  @HostListener('mouseleave') onMouseLeave() {
+    this.highlight(this.color);
+  }
+
+  private highlight(color: string) {
+    this.el.nativeElement.style.backgroundColor = color;
+  }
+}
+```
+
+Example of custom attribute directive usage
+```
+<p highlight [color]="red"> </p>
+```
+
+# What is ng-template
+- Is a short code template that can be later used in our component html file. Unlike regular html ng-template will not be rendered in DOM by default unless specific requirements are met. Its best used in conditional rendering.
+
+## ngTemplateOutlet
+- So we know that ng-template will not be rendered in DOM unless specific requirements are met right? This is where ngTemplateOutlet comes for example we have a code that we want to use in different parts of our component html ngTemplateOutlet comes.
+
+Usage
+1. import NgTemplateOutlet in TS file
+2. Define a ng-template with #<ng-template-name>
+```
+<ng-template #name>
+  <button> Join now </button>
+</ng-template>
+
+<div>
+  <div> Hero Section </div>
+  <div ngTemplateOutlet="name"></div>
+</div>
+
+Outputs to
+<div>
+  <div> Hero Section </div>
+  <button> Join now </button>
+</div>
+```
+
 
 # Angular Dependency Injection
 - Just like spring boot dependecy injection.
@@ -257,6 +313,41 @@ imports: [RouterOutlet, RouterModule, RouterLink, RouterLinkActive],
 
 ## When to use
 - When you need to notify the parent component that something happens in the child component.
+
+# Angular Life Cycle Hooks
+## ngOnInit: Will run before the component HTML file is rendered making it perfect for initialization logics. Only run once.
+
+## ngOnDestroy: Will run when components are no longer visible in DOM like ngIf and navigating to different page perfect use for clean up code. Such as unsubscribing to Observables, detaching event listeners, and clearing timers.
+ 
+## ngOnChanges: Will run when changes are detected in @Input properties of your component and will run first before ngOnInit. Related interfaces are SimpleChanges. Run multiple times.
+
+## ngAfterViewInit: Will run after the child components are initialized in the parent component. Only run once. Perfect used case for when using @ViewChild.
+
+## ngAfterContentInit: Will run after all the nested child components in the parent component are initialized. Only run once.
+
+## ngAfterViewChecked: Will run after the component view has been checked for changes. Just don't use this when you really need it. Research it and you will know.
+
+## ngAfterContentChecked: Will run after the component content has been checked. Just don't use this when you really need it. Research it and you will know.
+
+# Pipe
+- Is used to transform and format a data directly in your component.html file without needing to write code. It makes your code cleaner and modular.
+- Pipe is just a utility class in Java.
+
+## Syntax
+- Identified by {{ data | pipe : parameter }}
+- where the the data is your data
+- where pipe is the name of your pipe.
+- where : <parameter> is the parameter of your pipe function : is used instead of comma (,)
+```
+<p> {{ money | number : £}} </p>
+```
+
+Pipe with property binding
+```
+[elementProperty]="data | pipe : argument"
+```
+
+## Creating custom pipe just extend the PipeTransform
 
 # CSS notes
 ## Positioning
