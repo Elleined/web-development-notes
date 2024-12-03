@@ -349,6 +349,60 @@ Pipe with property binding
 
 ## Creating custom pipe just extend the PipeTransform
 
+# Developed to replace traditional RxJs Observables
+
+Before anything else you will read state in this tutorial. Basically state is just a variable wrapped in signal function to add reactive capabilities in that variable to easily react whenever that variable changes without needing unnecessary manual handling of that variable. Also easy logic for modifying variable state changes set and update function. Just like a variable with steroids
+
+Thats why its called state basically your variable value is the state whenever your application currently in for example what will happen if this variable is in false STATE notice that the value of the variable is your application state..
+
+When we talk about state, it refers to the current condition or "state" of a variable, which determines how the application behaves or appears. The concept of wrapping a variable in a signal adds reactive capabilities to this state, making it easier to manage and respond to changes.
+
+# When to use Signals or Observable
+https://medium.com/@eugeniyoz/angular-signals-best-practices-9ac837ab1cec
+# Usage of input, output, and model signal
+https://blog.angular-university.io/angular-signal-components/
+
+# 3 Types of Signals
+## Writable Signal
+- Allows you to modify the state/ value.
+- A signal holds a value and can be read synchronously.
+- When the value of a signal changes, components or computations using the signal automatically re-render or re-evaluate.
+
+## Computed Signal
+- Are readonly and derived from other signals basically its using other signals to change its own value when the dependent signal are updated its own value also changed based on dependent signal. In analogy its like in video game when the player can wear equipment like helmet, plate, shoes, brace, etc.. the equipment itself is a signal and the main character is the computed signal whenever you change one of the equipment it will also change the main character appearance right.
+- Create a derived signal whose value is calculated from other signals.
+- Automatically updates when the dependent signals change.
+
+## Effect Signal
+- Is used to track whenever a signal is changed and the best way to declare effect signal is in contructor. Basically whenever a signal is changed the effect will be executed. In analogy from the same example in video game whenever the equipment is changed your stats should be updated too right? You don't want to buy expensive equipment that does nothing at all other than make you look fancy of course you want that equipment to have an effect on your character in the in this case boosting up your stats.
+- Just like a side effect.
+
+
+# 3 Specific types of signal
+Read this before proceeding
+https://blog.angular-university.io/angular-signal-components/
+## input()
+- Replacement for @Input
+- read only signal
+## output()
+- Replacement for @Output
+## model()
+- Behaves just like traditional [()] which is typically called banana-in-a-box
+- Two way databinding for parent and child
+- A writeable input and output signal
+- Use only if necesarry
+
+# inject
+- Use this only if you have inheritance in your components.
+
+# Most popular signals function
+- model()
+- input()
+- output()
+- inject()
+- signal()
+
+
 # CSS notes
 ## Positioning
 - absolute: Will be removed from the DOM. The other html elements treat it as it doesn't exists. Bahala ka san mo sya ilalagay.
